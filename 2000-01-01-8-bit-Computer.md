@@ -9,7 +9,7 @@ hero_height: is-small
 hero_darken: true
 tags: project
 series: amp_lab_project
-author: Ryan Wright
+author: Ryan Wright, Robert Perkel
 show_sidebar: false
 ---
 
