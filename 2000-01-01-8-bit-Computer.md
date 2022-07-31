@@ -3,8 +3,8 @@ layout: project_template
 title: 8-bit Computer
 description: In this project we will explore computer fundamentals and gain insights into how computers work at the lowest possible level.
 date: 2000-01-01 09:00:00
-hero_image: /web/img/8-bit-Computer/open_house.png
-image: /web/img/8-bit-Computer/open_house.png
+hero_image: /web/img/8-bit-Computer/Hero.png
+image: /web/img/8-bit-Computer/Hero.png
 hero_height: is-small
 hero_darken: true
 tags: project
