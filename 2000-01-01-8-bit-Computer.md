@@ -20,7 +20,7 @@ Ryan Wright
 Robert Perkel
 
 ## Repo Link
-<a class="button is-link" href="https://github.com/Amp-Lab-at-VT/8-bit-Computer"" >8-bit-Computer</a>
+<a class="button is-link" href="https://github.com/Amp-Lab-at-VT/8-bit-Computer" >8-bit-Computer</a>
 
 ## Photo
 
