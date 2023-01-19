@@ -1,0 +1,79 @@
+use MAR as ctrl register / stepper selector, use RAM out as clocks
+no RAM needed, four registers used for counting.
+--------------------------------
+MAR:
+bit 0 - done indicator
+bit 1 - y axis stepper direc
+bit 2 - x axis stepper direc
+bit 3 - z axis stepper direc
+bit 4 - unused 
+bit 5 - unused
+bit 6 - unused
+bit 7 - unused
+--------------------------------
+RAM:
+bit 0 - final cc indicator
+bit 1 - y axis stepper clock
+bit 2 - x axis stepper clock
+bit 3 - z axis stepper clock
+bit 4 - unused 
+bit 5 - unused
+bit 6 - unused
+bit 7 - unused
+--------------------------------
+ROM Example Algorithms Overview:
+0. bios / jump to reset algorithm
+	Opens ROM on boot, jump to instruction jump commands
+1. reset position
+	this program moves all steppers back to the 0,0,0 coordinate
+2. moveY(amount)
+	decrement until 0, branch - payload is RAM <- 2, 3 when done
+3. moveX(amount)
+	decrement until 0, branch - payload is RAM <- 4, 5 when done
+4. moveZ(amount)
+	decrement until 0, branch - payload is RAM <- 8, 9 when done
+5. kill
+	set done indicator high, jump to hold loop
+--------------------------------
+BIOS / JUMP TO RESETS:
+
+pc1 2		--jump freeze
+pc1 1		--freeze
+rd 1		--prep shift
+mar x16		--prel TESTHW
+pc1 x16		--func17 RESETPOS
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+pc1 2		--refresh kernel
+*LN16 END KERNEL 0
+--------------------------------
+
+RESET POSITION
+
+?? maybe the person operating the machine does this
+--------------------------------
+MOVE_Y (this will be the same for x, z just different payloads)
+
+ra x16		--func? MOVE_Y(d: amount, m: dir, c: return_to) a: inc b:decby c: shifter d: cond
+rb 0		
+rb neg		--inc by -1
+rd 4
+pc2 x16		--BRZ
+rc lsl		--prep rc for return_to
+ra apb		--decrement, loop begin
+ram 2		--payload, trigger movement
+rd ra		--prep conditional
+pc1 lsr		--if 0, ESCAPE to rc
+ram 3		--indicate final cc
+ra pc1
+rb 8
+rb neg
+pc1 apb		--abp must equal ?line number of function
+--------------------------------

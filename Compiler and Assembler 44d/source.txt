@@ -1,0 +1,15 @@
+//Example Source Code
+
+
+pointer yAxisClock ram				--note: creates a pointer to a register
+pointer xAxisClock ram
+pointer zAxisClock ram				--considerations: maybe pointer could reference a specific bit and the compiler could keep track?
+									tell the compiler to write a preset program to initialize locations in 
+									runtime ram to ....
+
+function moveY has preq inc incby mar 		--note: function creates a func with name, "has preq" defines parameters	
+	loop dpen rd 0				--note: loop initiates a loop until rd is 0
+		pulse yAxisClock		--note: pulse is a 0 to 1 to 0, toggle flips current state. Compiler needs to remember current state
+		decrement			--note: decrement subroutine manages the movement between RA and RD to check conditional decrementer
+
+function 

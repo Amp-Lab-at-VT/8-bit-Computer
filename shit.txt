@@ -1,0 +1,6 @@
+pc1 2		--jump freeze
+pc1 1		--freeze 
+ram 1
+ra ram
+ram 1
+ra ram
