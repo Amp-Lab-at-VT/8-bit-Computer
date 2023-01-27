@@ -1,8 +1,8 @@
-# STUDENT NAMES
-EDDIE PRITCHARD
+# Student Names
+Eddie Pritchard
 
-# SUMMARY
-THE 8 BIT COMPUTER IS A COMPUTER I SWEAR
+# Summary
+The 8 bit computer is a computer I swear
 
-# DATE STARTED
+# Date Started
 1-16-2022
