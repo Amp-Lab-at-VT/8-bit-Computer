@@ -1,0 +1,13 @@
+1. To run the compiler, ensure that python is installed.
+
+2. place RTL instructions in 8bpin.txt
+
+3. retrieve compiled code in atc256.txt
+
+4. To run compiled program, connect ROM programmer.
+
+5. Open a programmer such as XGPro
+
+5. Load data into programmer database and flash.
+
+6. Place ROM back into processor and enable clock.

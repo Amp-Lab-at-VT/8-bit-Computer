@@ -11,7 +11,7 @@ with open("lut.txt", "r") as lu:
         nam,eqv = content.split(" ")
         d[nam] = eqv
 
-with open("shit.txt", "r") as pr:
+with open("8bpin.txt", "r") as pr:
     for line in pr:
         i = i + 1
         line = line.split("\t\t")[0]
