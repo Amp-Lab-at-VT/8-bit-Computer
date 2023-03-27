@@ -1,0 +1,97 @@
+pc1 2		--jump freeze
+pc1 1		--freeze
+rd 4		--prep shift
+pc1 x16		--func33 RESETPOS
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+*PAYLOAD
+pc1 2		--refresh kernel 
+*---------------------------------------------------------------------------------------------LN15 END KERNEL 0
+ra x16		--func17 MOVE_Y(a: amountx16, m: dir, c: return_to) b:decby c: shifter d: cond
+rb 0		
+rb neg		--inc by -1
+rd 4
+pc2 x16		--BRZ
+ra apb		--decrement, loop begin
+ram 2		--payload, trigger movement Y AXIS
+rd ra		--prep conditional
+pc1 lsr		--if 0, ESCAPE to rc
+ra pc1
+rb 8
+pc2 0		--MAY NEED TO FIX
+rd x16		--rotate
+rb neg		--ERROR, must reset the PC2 to allow jump
+pc1 apb		--abp must equal ?line number of function
+*---------------------------------------------------------------------------------------------LN31 END MOVE_Y
+ra x16		--func17 MOVE_X(a: amountx16, m: dir, c: return_to) b:decby c: shifter d: cond
+rb 0		
+rb neg		--inc by -1
+rd 4
+pc2 x16		--BRZ
+ra apb		--decrement, loop begin
+ram 2		--payload, trigger movement Y AXIS
+rd ra		--prep conditional
+pc1 lsr		--if 0, ESCAPE to rc
+ra pc1
+rb 8
+pc2 0		--MAY NEED TO FIX
+rd x16		--rotate
+rb neg		--ERROR, must reset the PC2 to allow jump
+pc1 apb		--abp must equal ?line number of function
+*---------------------------------------------------------------------------------------------LN47 END MOVE_Y
+ra x16		--func17 MOVE_Z(a: amountx16, m: dir, c: return_to) b:decby c: shifter d: cond
+rb 0		
+rb neg		--inc by -1
+rd 4
+pc2 x16		--BRZ
+ra apb		--decrement, loop begin
+ram 2		--payload, trigger movement Y AXIS
+rd ra		--prep conditional
+pc1 lsr		--if 0, ESCAPE to rc
+ra pc1
+rb 8
+pc2 0		--MAY NEED TO FIX
+rd x16		--rotate
+rb neg		--ERROR, must reset the PC2 to allow jump
+pc1 apb		--abp must equal ?line number of function
+*---------------------------------------------------------------------------------------------LN63 END MOVE_Z
+*LN64 BEGIN INSTRUCTION ONE (move x +255)
+ra pc1		--save return to start pos
+rb 14		--offset + 10 for return to
+rc apb		--PREP RETURNTO RESERVE C
+rc lsl		--prep rc for return_to
+mar 4		--set x axis direction 4 = ?, 0 = ? PREP DIR RESERVE MAR
+rd 15		--MSB of amount
+ra x16		--transfer
+rb 15		--LSB of amount
+ra apb		--PREP AMOUNT RESERVE A
+rd 2		--prep jump to moveX
+pc1 x16		--JUMP to MOVEY
+*EXTRA
+*EXTRA
+*---------------------------------------------------------------------------------------------LN79 END INSTRUCTION ONE
+pc2 0		--clear jump flag
+*LN80 BEGIN INSTRUCTION TWO (move x -255)
+ra pc1		--save return to start pos
+rb 14		--offset + 10 for return to
+rc apb		--PREP RETURNTO RESERVE C
+rc lsl		--prep rc for return_to
+mar 0		--set x axis direction 4 = ?, 0 = ? PREP DIR RESERVE MAR
+rd 15		--MSB of amount
+ra x16		--transfer
+rb 15		--LSB of amount
+ra apb		--PREP AMOUNT RESERVE A
+rd 2		--prep jump to moveX
+pc1 x16		--JUMP to MOVEX
+*EXTRA
+*EXTRA
+*---------------------------------------------------------------------------------------------LN79 END INSTRUCTION TWO
+pc2 0		--clear jump flag
+*LN80 BEGIN INSTRUCTION THREE
+pc1 1

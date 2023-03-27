@@ -1,0 +1,6 @@
+mar 1		--func65 RUNNER() test quicksave
+ram pc1		--str return_to @1
+mar 2
+ram 4		--str offset @2
+mar 4		--preload QSV @ 4
+pc1 15		--func17 QSV(m:return_to)
